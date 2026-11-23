@@ -1,9 +1,9 @@
 import Foundation
 
-/// Where the data comes from. The cuisine-explorer repo's weekly rebuild commits fresh data
+/// Where the data comes from. The world-cuisines repo's weekly rebuild commits fresh data
 /// here; to serve it from somewhere else, change this one line.
 enum DataSource {
-    static let root = URL(string: "https://raw.githubusercontent.com/kyle-pace/cuisine-explorer/main/data/")!
+    static let root = URL(string: "https://raw.githubusercontent.com/kyle-pace/world-cuisines/main/data/")!
     static let base = root.appendingPathComponent("web/")
 }
 
@@ -25,7 +25,7 @@ final class Remote: Sendable {
                                    directory: FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first?
                                        .appendingPathComponent("data", isDirectory: true))
         config.timeoutIntervalForRequest = 15
-        config.httpAdditionalHeaders = ["User-Agent": "CuisineExplorer-iOS/0.1 (https://github.com/kyle-pace/cuisine-explorer)"]
+        config.httpAdditionalHeaders = ["User-Agent": "CuisineExplorer-iOS/0.1 (https://github.com/kyle-pace/world-cuisines)"]
         session = URLSession(configuration: config)
     }
 

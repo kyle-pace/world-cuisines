@@ -123,7 +123,7 @@ struct PageContent: View {
                 ConnectionsSection(ref: page.ref).padding(.top, 30).id("Connections")
             }
 
-            if let url = URL(string: "https://github.com/kyle-pace/cuisine-explorer/issues/new?title="
+            if let url = URL(string: "https://github.com/kyle-pace/world-cuisines/issues/new?title="
                              + (page.name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")) {
                 Text(LocalizedStringKey(String("Something wrong or missing? [Suggest a correction](\(url.absoluteString)).")))
                     .font(Theme.caption).foregroundStyle(Theme.muted).padding(.top, 32)

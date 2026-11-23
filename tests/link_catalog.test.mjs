@@ -1,5 +1,5 @@
 // Tests for scripts/link_catalog.mjs: World cuisine ingredients linked to KitchenCatalog ids.
-// Runs against a saved real sample of data/food.json's ingredients and of Recipe search's
+// Runs against a saved real sample of data/food.json's ingredients and of finDish's
 // index, plus broken records. Run with: node --test tests/
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -59,6 +59,6 @@ test('recipe counts come from the real index and ignore junk rows', () => {
   assert.deepEqual(recipeCounts('<html>error</html>'), {});
 });
 
-test('recipe links point at Recipe search with the catalog id', () => {
-  assert.equal(recipesUrl('palm-sugar'), 'https://kylepace.dev/recipe-search/?with=palm-sugar');
+test('recipe links point at finDish with the catalog id', () => {
+  assert.equal(recipesUrl('palm-sugar'), 'https://findish.now/?with=palm-sugar');
 });

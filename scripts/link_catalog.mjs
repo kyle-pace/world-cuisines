@@ -1,11 +1,11 @@
 // Links World cuisine's ingredients to KitchenCatalog, the grocery list Henwood, Grocery
-// Deals and Recipe search share, so an ingredient page can send you to recipes for it.
+// Deals and finDish share, so an ingredient page can send you to recipes for it.
 //
 // For each ingredient in data/food.json:
 //   1. a hand decision in data/catalog_overrides.json wins (a catalog id, or null for "don't link");
 //   2. otherwise the catalog's own matcher, keeping only strong matches to ingredients
 //      (not ready-made products).
-// Then it adds how many recipes Recipe search has for each catalog id, read from its public
+// Then it adds how many recipes finDish has for each catalog id, read from its public
 // index. If that can't be reached, the last counts are kept.
 //
 // Writes data/catalog_links.json: { built, recipesChecked, links: { <ingredient id>: { id, name, recipes } } }
@@ -18,8 +18,8 @@ import { fileURLToPath } from 'node:url';
 import { load, match } from './kitchen-catalog/catalog.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-export const RECIPE_INDEX = 'https://kylepace.dev/recipe-search/index.json';
-export const recipesUrl = (id) => `https://kylepace.dev/recipe-search/?with=${encodeURIComponent(id)}`;
+export const RECIPE_INDEX = 'https://findish.now/index.json';
+export const recipesUrl = (id) => `https://findish.now/?with=${encodeURIComponent(id)}`;
 
 /** Wikipedia titles carry disambiguation in parentheses ("Maida (flour)"); the matcher wants the name. */
 const plain = (name) => String(name).replace(/\s*\([^)]*\)/g, '').trim();
@@ -50,7 +50,7 @@ export function linkIngredients(catalog, ingredients, overrides = {}) {
   return { links, skipped };
 }
 
-/** { catalog id: number of recipes } from Recipe search's index (its `ing` rows are [id, name, count, ...]). */
+/** { catalog id: number of recipes } from finDish's index (its `ing` rows are [id, name, count, ...]). */
 export function recipeCounts(index) {
   const out = {};
   for (const row of index?.ing ?? []) if (Array.isArray(row) && typeof row[0] === 'string' && Number.isFinite(row[2])) out[row[0]] = row[2];
@@ -79,7 +79,7 @@ async function main() {
     process.exit(1);
   }
 
-  // Recipe counts: fresh if Recipe search answers, otherwise the last run's.
+  // Recipe counts: fresh if finDish answers, otherwise the last run's.
   let counts = null;
   let recipesChecked = last.recipesChecked ?? null;
   if (!process.argv.includes('--offline')) {

@@ -37,13 +37,13 @@ const shelfAction = (i) => {
   const label = g.continent ? "More from " + g.name.replace(/^(The|Across) /, (w) => w.toLowerCase()) : "Every ingredient";
   return [{ kind: "shelf", url: "/world-cuisine/ingredients/#ing-" + slug(i.id), label }];
 };
-// Ingredient -> KitchenCatalog id and Recipe search's recipe count (scripts/link_catalog.mjs)
+// Ingredient -> KitchenCatalog id and finDish's recipe count (scripts/link_catalog.mjs)
 const catalogLinks = read("catalog_links.json", { links: {} }).links || {};
 const recipesAction = (i) => {
   const l = catalogLinks[i.id];
   if (!l || !(l.recipes > 0)) return [];
   const what = l.name.toLowerCase();
-  return [{ kind: "recipes", id: l.id, url: "https://kylepace.dev/recipe-search/?with=" + encodeURIComponent(l.id),
+  return [{ kind: "recipes", id: l.id, url: "https://findish.now/?with=" + encodeURIComponent(l.id),
     label: `${l.recipes.toLocaleString("en-US")} ${l.recipes === 1 ? "recipe" : "recipes"} with ${what}` }];
 };
 

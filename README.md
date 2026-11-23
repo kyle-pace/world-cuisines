@@ -51,11 +51,11 @@ When the automatic match puts something in the wrong place, fix it in `data/over
 
 ## Recipes for ingredients
 
-Each ingredient is linked to [KitchenCatalog](https://github.com/kyle-pace/kitchen-catalog), the grocery list Recipe search, Henwood and Seattle Grocery Deals share, so an ingredient page can say "143 recipes with palm sugar" and link to [Recipe search](https://kylepace.dev/recipe-search/) with that ingredient picked. `scripts/link_catalog.mjs` runs in the weekly update:
+Each ingredient is linked to [KitchenCatalog](https://github.com/kyle-pace/kitchen-catalog), the grocery list finDish, Henwood and Seattle Grocery Deals share, so an ingredient page can say "143 recipes with palm sugar" and link to [finDish](https://kylepace.dev/recipe-search/) with that ingredient picked. `scripts/link_catalog.mjs` runs in the weekly update:
 
 1. A hand decision in `data/catalog_overrides.json` wins: a catalog id, or `null` for "don't link". Use it for names only Wikipedia uses (Agaricus bisporus is mushrooms, Maize is corn) and to turn off a wrong guess.
 2. Otherwise the catalog's own matcher decides, keeping only strong matches to ingredients, not ready-made products.
-3. Recipe counts come from Recipe search's public index. If it can't be reached, last week's counts stay.
+3. Recipe counts come from finDish's public index. If it can't be reached, last week's counts stay.
 
 It writes `data/catalog_links.json`. If a grocery is missing from the catalog altogether, add it in KitchenCatalog (and check its answer keys), then run `npm run sync-catalog` here: the copy lives in `scripts/kitchen-catalog/`, not `vendor/`, so it isn't published with the site. Tests: `node --test tests/*.test.mjs`.
 

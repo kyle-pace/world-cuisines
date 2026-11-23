@@ -247,7 +247,7 @@ struct MapScreen: View {
 
     private func suggest(_ country: String) {
         let title = "\(country): add its cuisine".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        if let url = URL(string: "https://github.com/kyle-pace/cuisine-explorer/issues/new?title=\(title)") { UIApplication.shared.open(url) }
+        if let url = URL(string: "https://github.com/kyle-pace/world-cuisines/issues/new?title=\(title)") { UIApplication.shared.open(url) }
     }
 
     private func focus() {

@@ -12,10 +12,10 @@ struct SettingsView: View {
                     Text("Intros come from Wikipedia (CC BY-SA), photos from Wikimedia Commons with each one's credit, and production figures from FAOSTAT (CC BY 4.0). The recipe sites, cookbooks and notes were picked or written for this explorer.")
                         .font(Theme.callout)
                         .foregroundStyle(Theme.muted)
-                    Link(destination: URL(string: "https://github.com/kyle-pace/cuisine-explorer")!) {
+                    Link(destination: URL(string: "https://github.com/kyle-pace/world-cuisines")!) {
                         Label("The data and code on GitHub", systemImage: "arrow.up.right")
                     }
-                    Link(destination: URL(string: "https://github.com/kyle-pace/cuisine-explorer/issues/new")!) {
+                    Link(destination: URL(string: "https://github.com/kyle-pace/world-cuisines/issues/new")!) {
                         Label("Suggest a correction", systemImage: "arrow.up.right")
                     }
                 } header: {

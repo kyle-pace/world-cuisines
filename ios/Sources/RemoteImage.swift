@@ -13,7 +13,7 @@ final class ImageLoader {
         let config = URLSessionConfiguration.default
         config.urlCache = URLCache(memoryCapacity: 20 << 20, diskCapacity: 400 << 20)
         config.requestCachePolicy = .returnCacheDataElseLoad
-        config.httpAdditionalHeaders = ["User-Agent": "CuisineExplorer-iOS/0.1 (https://github.com/kyle-pace/cuisine-explorer)"]
+        config.httpAdditionalHeaders = ["User-Agent": "CuisineExplorer-iOS/0.1 (https://github.com/kyle-pace/world-cuisines)"]
         config.httpMaximumConnectionsPerHost = 4
         session = URLSession(configuration: config)
         memory.countLimit = 300
