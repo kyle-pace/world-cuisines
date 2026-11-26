@@ -2,7 +2,7 @@
 
 A globe for exploring the world's cuisines. Wikipedia's [List of cuisines](https://en.wikipedia.org/wiki/List_of_cuisines) is the source of truth: the explorer maps what's on that list, shows each cuisine's Wikipedia intro live, and links back for everything else. On top of that sit hand-picked cookbooks and recipe sites for each cuisine.
 
-Live at **[kylepace.dev/world-cuisine](https://kylepace.dev/world-cuisine/)**, one of the experiments on [kylepace.dev](https://kylepace.dev). (It used to be Cuisine Explorer, at kylepace.net/labs/cuisines/.)
+Live at **[findish.now/explore](https://findish.now/explore/)**: since November 26, 2026 it is the Explore section of [finDish](https://github.com/kyle-pace/findish). This repo is still where the explorer and its data are made; finDish keeps a copy (`npm run sync-explore` there, weekly). kylepace.dev/world-cuisine/, where it lived as its own experiment, forwards every address to finDish. (Before that it was Cuisine Explorer, at kylepace.net/labs/cuisines/.)
 
 ## How it works
 
@@ -67,7 +67,7 @@ It writes `data/catalog_links.json`. If a grocery is missing from the catalog al
 2. Each ingredient goes where the biggest share of a part's dishes use it, smoothed so one dish in a small part doesn't outweigh many elsewhere. One found in dishes from six or more parts is "All over the world" (garlic, sugar, egg). Ingredients in no dish yet get their own group.
 3. Each part lists its six most-used first, then the rest A to Z. Ingredients that share a page (Wikipedia's "Atta flour" and "Atta (flour)") are listed once.
 
-The page (`src/pages/world-cuisine/ingredients.astro`) has both orders, by part of the world and A to Z, as plain lists of links, with a find box, a part-of-the-world filter and an order switch kept in the address (`?where=southeast-asia&order=az`). Without JavaScript it shows the list by part of the world with links to each part. Ingredient pages link to their spot ("More from Southeast Asia", `#ing-<slug>`).
+The page (in finDish, `src/pages/explore/ingredients.astro`) has both orders, by part of the world and A to Z, as plain lists of links, with a find box, a part-of-the-world filter and an order switch kept in the address (`?where=southeast-asia&order=az`). Without JavaScript it shows the list by part of the world with links to each part. Ingredient pages link to their spot ("More from Southeast Asia", `#ing-<slug>`).
 
 It started on November 14, 2026 as the ingredient map, a drawing of ingredients grouped by what they're cooked with; that was too crowded, then grouping by cooked-with read as arbitrary, so it became this. `/world-cuisine/ingredient-map/` redirects here. Share card: `node scripts/render-og.mjs ingredients`. Tests: `node --test tests/*.test.mjs`.
 
@@ -102,21 +102,19 @@ Cuisine list and descriptions from Wikipedia and Wikidata (CC BY-SA / CC0). Coun
 
 ## The site
 
-The explorer is served by an Astro site on its own Cloudflare Worker, at kylepace.dev/world-cuisine/:
-
-```sh
-npm install
-npm run dev       # http://localhost:4321/world-cuisine/
-npm run build     # stages the explorer into public/world-cuisine/app/, then builds
-npm run preview   # builds, then runs it the way Cloudflare will
-```
+The pages people see are in finDish now (`src/pages/explore/` there). What's left here is one small Astro site on the Cloudflare Worker `world-cuisine`, still mounted on kylepace.dev/world-cuisine, that forwards every old address with a 301:
 
 | What | Where |
 | --- | --- |
-| The framed page | `src/pages/world-cuisine/index.astro` |
-| Cuisine, dish and ingredient pages | `src/pages/world-cuisine/[type]/[slug].astro` (rendered on request, noindex) |
-| Photos | `src/pages/world-cuisine/img/[...path].ts`, kept in the R2 bucket `kylepace-cuisine-images` |
-| Staging the explorer | `scripts/stage-app.mjs` |
-| Share card | `scripts/og-card.html`, rendered to `og.png` by `node scripts/render-og.mjs` |
+| The forwarding route | `src/pages/world-cuisine/[...path].ts` |
+| Which old address goes where | `src/lib/forward.mjs` (tests in `tests/forward.test.mjs`) |
+
+Most addresses keep their shape (`/world-cuisine/dish/bibimbap/` to `findish.now/explore/dish/bibimbap/`); About and How it's built go to `findish.now/explore/`.
+
+```sh
+npm install
+npm run build     # builds the forwarding Worker
+npm run preview   # builds, then runs it the way Cloudflare will
+```
 
 Cloudflare Workers Builds deploys `main` (build `npm run build`, deploy `npx wrangler deploy`).

@@ -2,16 +2,15 @@
   "name": "world-cuisine",
   "private": true,
   "type": "module",
-  "description": "World cuisine: the world's cuisines, dishes and ingredients on one globe, at kylepace.dev/world-cuisine/",
+  "description": "World cuisine: the data and explorer behind finDish's Explore section (findish.now/explore/). kylepace.dev/world-cuisine/ forwards there.",
   "scripts": {
     "web": "node scripts/build_web.mjs",
     "link": "node scripts/link_catalog.mjs",
     "sync-catalog": "node scripts/sync-catalog.mjs",
-    "dev": "node scripts/stage-app.mjs && astro dev",
-    "build": "node scripts/stage-app.mjs && astro build",
+    "dev": "astro dev",
+    "build": "astro build",
     "preview": "npm run build && wrangler dev",
-    "astro": "astro",
-    "check": "node .agents/skills/page-check/check.mjs --js-budget 100"
+    "astro": "astro"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.4.6",

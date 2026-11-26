@@ -27,5 +27,5 @@ jobs:
       contents: read
     uses: kyle-pace/principles/.github/workflows/check.yml@main
     with:
-      # The Astro build stages the explorer and writes the whole site here.
-      output-dir: dist/client
+      # The site is one forwarding route now, so there are no built pages to check.
+      output-dir: ''
