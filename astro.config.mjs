@@ -2,19 +2,13 @@
 import { defineConfig } from 'astro/config';
 import cloudflare from '@astrojs/cloudflare';
 
-// World cuisine lives at kylepace.dev/world-cuisine/. It's its own Worker, mounted on
-// that path by the routes in wrangler.jsonc; the hub (kyle-pace/kylepace.dev) serves
-// everything else on the domain.
-// Everything this site serves sits under /world-cuisine/: pages in
-// src/pages/world-cuisine/, the staged globe in public/world-cuisine/app/, and built
-// assets in /world-cuisine/_astro/. (Astro's `base` option isn't used: with the
-// Cloudflare adapter it serves the files from the wrong folder.)
-// Static by default; the item pages and the photo route render on request.
+// World cuisine became finDish's Explore section on 2026-11-26. This Worker is still
+// mounted on kylepace.dev/world-cuisine by the routes in wrangler.jsonc, and its one
+// route (src/pages/world-cuisine/[...path].ts) forwards every address to
+// findish.now/explore/. The explorer's pages and data at the repo root are the source
+// finDish copies (npm run sync-explore there); nothing here serves them any more.
 export default defineConfig({
   site: 'https://kylepace.dev',
-  build: { assets: 'world-cuisine/_astro' },
   session: false,
-  // The ingredient map (November 14, 2026) became the Every ingredient page the same night
-  redirects: { '/world-cuisine/ingredient-map': '/world-cuisine/ingredients/' },
   adapter: cloudflare({ imageService: 'compile' }),
 });
