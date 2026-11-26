@@ -1,5 +1,7 @@
 # Cuisines for iPhone
 
+**Moved, November 26, 2026:** this app is now the Explore tab of the finDish app (kyle-pace/findish-app, `App/Sources/Explore/`). Change it there. The code here is kept as the record of where it came from and is no longer built or shipped.
+
 A native SwiftUI version of the cuisine explorer, built like Henwood and Grocery Deals:
 KitchenUI for type, color and shared components, XcodeGen for the project.
 
