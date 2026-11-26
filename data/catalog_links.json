@@ -1,6 +1,6 @@
 {
- "built": "2026-11-24",
- "recipesChecked": "2026-11-24",
+ "built": "2026-11-26",
+ "recipesChecked": "2026-11-26",
  "links": {
   "Adzuki bean": {
    "id": "adzuki-beans",
@@ -492,7 +492,7 @@
    "name": "Chayote",
    "recipes": 26
   },
-  "Cheddar cheese": {
+  "Cheddar": {
    "id": "cheese-cheddar",
    "name": "Cheddar cheese",
    "recipes": 505
